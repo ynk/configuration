@@ -1,0 +1,55 @@
+## Uhh so this is supposed to enable syntax highlighting??
+include "/usr/share/nano/*.nanorc"  # idk, I think this makes colors work?
+
+## Show line numbers cuz duh
+set linenumbers  # makes it easier to find stuff I guess?
+
+## Indents automatically, so I don’t have to do it myself
+set autoindent  # lazy mode activated
+
+## Tabs are evil, so this turns them into spaces
+set tabstospaces  # spaces > tabs? idk seems right
+
+## This makes tabs not HUGE
+set tabsize 4  # 4 spaces? 2 spaces? who even decides these things??
+
+## Soft wrap so lines don’t just run off into the void
+set softwrap  # I think this stops lines from disappearing off the screen
+
+## Brackets get little highlights, so you don’t mess up
+set matchbrackets "()[]{}"  # brackety bois glow up
+
+## Backups?? I guess it makes a copy before saving? Sure, why not
+set backup  # just in case I break everything
+
+## Pretty colors for the UI... hopefully
+set titlecolor cyan,black  # title bar thingy
+set statuscolor yellow,blue  # status bar, I think?
+set numbercolor green,black  # numbers should be green. why not
+set keycolor red,black  # important stuff = red. makes sense, I guess?
+
+## This does *something* with moving around words
+set wordbounds  # lets me jump words with ctrl+left/right?? idk
+
+## Stop messing with my line endings!! (no weird Windows stuff pls)
+set noconvert  # lf, crlf, whatever, just don’t break my files
+
+## Some scrolling magic so my eyes don’t have to work so hard
+set minibar  # makes status bar smaller? I think?
+set positionlog  # remembers where I was? idk, sounds smart
+
+## No idea what this does but it sounds useful
+set nohelp  # something about not overwriting the clipboard??
+
+## Stops me from rage-quitting Nano accidentally
+set locking  # "ARE YOU SURE YOU WANT TO EXIT?" yes, I need this.
+
+## Prevents Nano from breaking words in a dumb way
+set nowrap  # wraps text but not mid-word? sounds good.
+
+## OK so now the status bar should be useful... I think?
+set constantshow  # shows line/column numbers so I don’t get lost
+set stateflags  # tells me what mode I’m in, so I don’t panic
+set indicator  # puts a lil’ * if I forgot to save (oops)
+
+#yea this was chatgpt, i dont actually now how to write a good nanorc but its solid, i guess.
