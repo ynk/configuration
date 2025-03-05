@@ -3,8 +3,8 @@
 set -e
 
 ZSH_CONFIG="$HOME/.config/zsh"
-ZSHRC_URL="https://raw.githubusercontent.com/ynk/configuration/main/.config/.zshrc"
-ZSH_CUSTOM="$HOME/.oh-my-zsh"
+ZSHRC_URL_BASE="https://raw.githubusercontent.com/ynk/configuration/main/.config/zsh"
+ZSH_CUSTOM="$HOME/.oh-my-zsh/custom"
 
 if [ -f /etc/debian_version ]; then
   OS="ubuntu"
@@ -15,9 +15,9 @@ else
 fi
 
 if [ "$OS" == "ubuntu" ]; then
-  sudo apt update && sudo apt install -y zsh git curl wget powerline fonts-powerline fonts-firacode fzf
+  sudo apt update && sudo apt install -y zsh git curl wget
 elif [ "$OS" == "arch" ]; then
-  sudo pacman -Syu --noconfirm zsh git curl wget powerline powerline-fonts ttf-fira-code fzf
+  sudo pacman -Syu --noconfirm zsh git curl wget
 fi
 
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
@@ -25,19 +25,33 @@ if [ ! -d "$HOME/.oh-my-zsh" ]; then
 fi
 
 mkdir -p "$ZSH_CONFIG"
-wget -O "$ZSH_CONFIG/.zshrc" "$ZSHRC_URL"
-ln -sf "$ZSH_CONFIG/.zshrc" "$HOME/.zshrc"
 
+# Ask user which version to install
+read -p "Install (1) Full or (2) Minimal Zsh setup? [1/2]: " choice
+if [ "$choice" == "2" ]; then
+  ZSHRC_URL="$ZSHRC_URL_BASE/minimal.zshrc"
+  PLUGINS=(
+    "zsh-users/zsh-autosuggestions"
+    "zsh-users/zsh-syntax-highlighting"
+    "zsh-users/zsh-completions"
+  )
+  ln -sf "$ZSH_CONFIG/minimal.zshrc" "$HOME/.zshrc"
+else
+  ZSHRC_URL="$ZSHRC_URL_BASE/full.zshrc"
+  PLUGINS=(
+    "zsh-users/zsh-autosuggestions"
+    "zsh-users/zsh-syntax-highlighting"
+    "zsh-users/zsh-completions"
+    "MichaelAquilina/zsh-you-should-use"
+    "zdharma-continuum/fast-syntax-highlighting"
+    "Aloxaf/fzf-tab"
+    "zsh-users/zsh-history-substring-search"
+  )
+  ln -sf "$ZSH_CONFIG/full.zshrc" "$HOME/.zshrc"
+fi
+
+wget -O "$ZSH_CONFIG/.zshrc" "$ZSHRC_URL"
 mkdir -p "$ZSH_CUSTOM/plugins"
-PLUGINS=(
-  "zsh-users/zsh-autosuggestions"
-  "zsh-users/zsh-syntax-highlighting"
-  "zsh-users/zsh-completions"
-  "MichaelAquilina/zsh-you-should-use"
-  "zdharma-continuum/fast-syntax-highlighting"
-  "Aloxaf/fzf-tab"
-  "zsh-users/zsh-history-substring-search"
-)
 
 for plugin in "${PLUGINS[@]}"; do
   plugin_name=$(basename "$plugin")
@@ -46,11 +60,8 @@ for plugin in "${PLUGINS[@]}"; do
   fi
 done
 
-mkdir -p "$HOME/.oh-my-zsh/themes"
-curl -fsSL -o "$HOME/.oh-my-zsh/themes/agnoster.zsh-theme" "https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/themes/agnoster.zsh-theme"
-
 if [ "$SHELL" != "$(which zsh)" ]; then
   chsh -s "$(which zsh)"
 fi
 
-echo "Zsh setup complete! run zsh"
+echo "Zsh setup complete! Run 'zsh' or restart your terminal."
