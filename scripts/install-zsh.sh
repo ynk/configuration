@@ -3,7 +3,7 @@
 set -e
 
 ZSH_CONFIG="$HOME/.config/zsh"
-ZSHRC_URL_BASE="https://raw.githubusercontent.com/ynk/configuration/main/.config/zsh"
+ZSHRC_URL_BASE="https://raw.githubusercontent.com/ynk/configuration/refs/heads/main/.config/"
 ZSH_CUSTOM="$HOME/.oh-my-zsh/custom"
 
 if [ -f /etc/debian_version ]; then
