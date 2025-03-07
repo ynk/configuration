@@ -1,0 +1,8 @@
+require("options")      
+require("mappings")     
+require("plugins")      
+require("theme")        
+require("lsp")          
+require("sidebar")      
+require("copilot")      
+require("git")          
